@@ -1,0 +1,154 @@
+/* Copyright (c) 2013-2017 Texas Instruments Incorporated.  All rights reserved. */
+
+/* Styling for the entire document. */
+body
+{
+    background-color: white;
+    color: black;
+    font-family: Ariel,Helvetica,sans-serif;
+}
+.navig{
+    background-color: cadetblue;
+    color: #ffffff;
+
+    font-family: Ariel,Helvetica,sans-serif;
+    margin: 20px;
+    padding: 25px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.content{
+    text-align: center;
+    padding: 10px;
+    margin: 10px;
+    height: 100%;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background: rgb(33, 158, 135);
+}
+.card{
+    text-align: center;
+    display: inline-block;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin: 20px;
+    padding: 10px;
+    background: #ffffff
+}
+/* Styling for the heading div. */
+#heading
+{
+    clear: both;
+    margin-bottom: 10px;
+}
+
+#heading_h1
+{
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+}
+
+#heading_h2
+{
+    font-size: 1.25em;
+    font-weight: bold;
+    text-align: center;
+}
+
+#heading hr
+{
+    border-bottom: 1px solid #32DCBB;
+    border-top: 1px solid #32DCBB;
+}
+#logo_ei{
+    width: 400px;
+    height: 120px;
+}
+#heading a img
+{
+    border: 0;
+}
+
+/* Styling for the menu div. */
+#menu
+{
+    float: left;
+    margin-bottom: 10px;
+    width: 225px;
+}
+
+#menu ul
+{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#menu a:link, #menu a:visited
+{
+    background-color: #32DCBB;
+    color: #ffffff;
+    display: block;
+    font-weight: bold;
+    margin-bottom: 2px;
+    margin-top: 2px;
+    padding: 4px;
+    text-align: center;
+    text-decoration: none;
+    width: 200px;
+}
+
+#menu a:hover, #menu a:active
+{
+    background-color: #28C9AB;
+}
+
+/* Styling for the content div. */
+#content
+{
+    margin-bottom: 10px;
+    margin-left: 225px;
+}
+
+#content_heading
+{
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Styling for the footing div. */
+#footing
+{
+    clear: both;
+    font-size: .75em;
+    font-style: italic;
+    text-align: right;
+}
+
+#footing hr
+{
+    border-bottom: 1px solid #28C9AB;
+    border-top: 1px solid #28C9AB;
+}
+/* unvisited link */
+a:link {
+    color: white;
+  }
+  
+  /* visited link */
+  a:visited {
+    color: black;
+  }
+  
+  /* mouse over link */
+  a:hover {
+    color: black;
+  }
+  
+  /* selected link */
+  a:active {
+    color: blue;
+  }
