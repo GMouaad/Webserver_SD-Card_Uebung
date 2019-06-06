@@ -26,7 +26,9 @@
 #include <string.h>
 #include "inc/hw_memmap.h"
 #include "driverlib/rom.h"
+#include "driverlib/rom_map.h"
 #include "driverlib/ssi.h"
+#include "driverlib/gpio.h"
 #include "utils/lwiplib.h"
 #include "utils/ustdlib.h"
 #include "httpserver_raw/httpd.h"
@@ -133,6 +135,8 @@ fs_open(const char *pcName)
         psFile->pextension = NULL;
         return (psFile);
     }
+    // TODO: Compare URI here
+
     else
     {
 
@@ -152,7 +156,6 @@ fs_open(const char *pcName)
 
         /* todo: Implementieren der funktion f_open*/
 
-
         if (fresult == FR_OK)
         {
             strcpy(FilNamebuf, "Valid");
@@ -167,7 +170,7 @@ fs_open(const char *pcName)
 
         strcpy(FilNamebuf, "Invalid");
         WriteDisplay(strcat(FilNamebuf, pcName), 0,
-                         CFAF128128B0145T_color_white, 0);
+                     CFAF128128B0145T_color_white, 0);
 
         //
         // If we get here, we failed to find the file on the Fat File System,

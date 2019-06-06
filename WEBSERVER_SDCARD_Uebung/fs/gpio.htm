@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    
+    <script type="text/javascript" src="gpio.js" language="JavaScript1.2" charset="utf-8"></script>
+    
+    
+    <title>Embedded Webserver</title>
+</head>
+
+<body>
+    <div id="heading">
+        <table width="100%" style="padding:20px;">
+            <tr>
+                <td>
+                    <a id="heading_ti" target="_"
+                        href="https://www.htwg-konstanz.de/hochschule/fakultaeten/elektro-und-informationstechnik/uebersicht/">
+                        <img src="logo_ei.jpg" id="logo_ei" alt="Fakultaet Elektro- und Informationstechnik"
+                            width="400px" height="120px">
+                    </a>
+                </td>
+                <td width="100%">
+                    <div id="heading_h1">
+                        Verteilte Systeme
+                    </div>
+                    <div id="heading_h2">
+                        Webserver Demo
+                    </div>
+                </td>
+                <td>
+                    <div class="navig">
+                        <a href="index.htm">Home</a></div>
+                </td>
+                <td>
+                    <div class="navig">
+                        <a href="tech.htm">TechStack</a></div>
+                </td>
+                <td>
+                    <div class="navig">
+                        <a href="about.htm">About</a></div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="content">
+        <div class="card">
+            <p id="ledState">LED State</p>
+            <div id="img">
+                <img src="led_off.png" alt="data graph" width="150px" height="150">
+            </div>
+            <br>
+            <br>
+            <button onclick="toggleLED();">Toggle LED</button>
+            <br>
+            <br>
+            LED ansteuern
+        </div>
+    </div>
+
+</body>
+
+</html>

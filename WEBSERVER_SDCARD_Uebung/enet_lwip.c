@@ -140,8 +140,7 @@ __error__(char *pcFilename, uint32_t ui32Line)
 //*****************************************************************************
 // Display an lwIP type IP Address and device MAC-Address
 //*****************************************************************************
-void
-DisplayIPnMACAddress(uint32_t ui32Addr)
+void DisplayIPnMACAddress(uint32_t ui32Addr)
 {
     uint8_t ui8_count = 0;
     char ui8_IpBuffer[15];
@@ -150,35 +149,37 @@ DisplayIPnMACAddress(uint32_t ui32Addr)
     char ui8_MACBuffer2[20];
 
     /* Convert the IP Address into a string */
-    convertINTtoCHAR((ui32Addr&0xff), ui8_IpBuffer);
-    for(ui8_count = 1; ui8_count < 4; ui8_count++)
+    convertINTtoCHAR((ui32Addr & 0xff), ui8_IpBuffer);
+    for (ui8_count = 1; ui8_count < 4; ui8_count++)
     {
         strcat(ui8_IpBuffer, ".");
-        convertINTtoCHAR(((ui32Addr>>(8*ui8_count))&0xff), ui8_IpBuffer2);
+        convertINTtoCHAR(((ui32Addr >> (8 * ui8_count)) & 0xff), ui8_IpBuffer2);
         strcat(ui8_IpBuffer, ui8_IpBuffer2);
     }
 
-
     /* Convert the MAC Address into a string (output decimal not hex)*/
-    convertINTtoCHAR((ui32User0&0xff), ui8_MACBuffer);
-    for(ui8_count = 1; ui8_count < 3; ui8_count++)
+    convertINTtoCHAR((ui32User0 & 0xff), ui8_MACBuffer);
+    for (ui8_count = 1; ui8_count < 3; ui8_count++)
     {
         strcat(ui8_MACBuffer, ".");
-        convertINTtoCHAR(((ui32User0>>(8*ui8_count))&0xff), ui8_MACBuffer2);
+        convertINTtoCHAR(((ui32User0 >> (8 * ui8_count)) & 0xff),
+                         ui8_MACBuffer2);
         strcat(ui8_MACBuffer, ui8_MACBuffer2);
     }
 
     strcat(ui8_MACBuffer, ".");
-    convertINTtoCHAR((ui32User1&0xff), ui8_MACBuffer2);
+    convertINTtoCHAR((ui32User1 & 0xff), ui8_MACBuffer2);
     strcat(ui8_MACBuffer, ui8_MACBuffer2);
-    for(ui8_count = 1; ui8_count < 3; ui8_count++)
+    for (ui8_count = 1; ui8_count < 3; ui8_count++)
     {
         strcat(ui8_MACBuffer, ".");
-        convertINTtoCHAR(((ui32User1>>(8*ui8_count))&0xff), ui8_MACBuffer2);
+        convertINTtoCHAR(((ui32User1 >> (8 * ui8_count)) & 0xff),
+                         ui8_MACBuffer2);
         strcat(ui8_MACBuffer, ui8_MACBuffer2);
     }
     /* Display the IP-Adress */
-    WriteDisplay(ui8_IpBuffer, ui8_MACBuffer, CFAF128128B0145T_color_green, CMD_DISPLAY_IP_MAC);
+    WriteDisplay(ui8_IpBuffer, ui8_MACBuffer, CFAF128128B0145T_color_green,
+                 CMD_DISPLAY_IP_MAC);
 }
 
 //*****************************************************************************
@@ -186,8 +187,7 @@ DisplayIPnMACAddress(uint32_t ui32Addr)
 // Required by lwIP library to support any host-related timer functions.
 //
 //*****************************************************************************
-void
-lwIPHostTimerHandler(void)
+void lwIPHostTimerHandler(void)
 {
     uint32_t ui32NewIPAddress;
 
@@ -199,19 +199,20 @@ lwIPHostTimerHandler(void)
     //
     // See if the IP address has changed.
     //
-    if(ui32NewIPAddress != g_ui32IPAddress)
+    if (ui32NewIPAddress != g_ui32IPAddress)
     {
         //
         // See if there is an IP address assigned.
         //
-        if(ui32NewIPAddress == 0xffffffff)
+        if (ui32NewIPAddress == 0xffffffff)
         {
             //
             // Indicate that there is no link.
             //
-            WriteDisplay("Waiting for link", 0, CFAF128128B0145T_color_white, 0);
+            WriteDisplay("Waiting for link", 0, CFAF128128B0145T_color_white,
+                         0);
         }
-        else if(ui32NewIPAddress == 0)
+        else if (ui32NewIPAddress == 0)
         {
             //
             // There is no IP address, so indicate that the DHCP process is
@@ -224,8 +225,10 @@ lwIPHostTimerHandler(void)
             //
             // Display the new IP address.
             //
-            WriteDisplay("Open a browser and", 0, CFAF128128B0145T_color_green, 0);
-            WriteDisplay("enter IP address", 0, CFAF128128B0145T_color_green, 0);
+            WriteDisplay("Open a browser and", 0, CFAF128128B0145T_color_green,
+                         0);
+            WriteDisplay("enter IP address", 0, CFAF128128B0145T_color_green,
+                         0);
             DisplayIPnMACAddress(ui32NewIPAddress);
         }
 
@@ -238,7 +241,7 @@ lwIPHostTimerHandler(void)
     //
     // If there is not an IP address.
     //
-    if((ui32NewIPAddress == 0) || (ui32NewIPAddress == 0xffffffff))
+    if ((ui32NewIPAddress == 0) || (ui32NewIPAddress == 0xffffffff))
     {
         //
         // Do nothing and keep waiting.
@@ -251,8 +254,7 @@ lwIPHostTimerHandler(void)
 // The interrupt handler for the SysTick interrupt.
 //
 //*****************************************************************************
-void
-SysTickIntHandler(void)
+void SysTickIntHandler(void)
 {
     //
     // Call the lwIP timer handler.
@@ -271,8 +273,7 @@ SysTickIntHandler(void)
 // This example demonstrates the use of the Ethernet Controller.
 //
 //*****************************************************************************
-int
-main(void)
+int main(void)
 {
     uint8_t pui8MACArray[8];
 
@@ -288,9 +289,10 @@ main(void)
     // Run from the PLL at 120 MHz.
     //
     g_ui32SysClock = MAP_SysCtlClockFreqSet((SYSCTL_XTAL_25MHZ |
-                                             SYSCTL_OSC_MAIN |
-                                             SYSCTL_USE_PLL |
-                                             SYSCTL_CFG_VCO_480), 120000000);
+    SYSCTL_OSC_MAIN |
+    SYSCTL_USE_PLL |
+    SYSCTL_CFG_VCO_480),
+                                            120000000);
     //
     // Configure the device pins.
     //
@@ -300,13 +302,12 @@ main(void)
     // Configure UART and the Display
     //
     UARTStdioConfig(0, 115200, g_ui32SysClock);
-    CFAF128128B0145T_init(1, g_ui32SysClock, 20000000);          /* Use boostpack1, with 2MHz-SPI clock */
+    CFAF128128B0145T_init(1, g_ui32SysClock, 20000000); /* Use boostpack1, with 2MHz-SPI clock */
 
     //
     // Clear the terminal and print banner.
     //
     WriteDisplay("Webserver Example", 0, CFAF128128B0145T_color_white, 0);
-
 
     //
     // Configure Port N1 for as an output for the animation LED.
@@ -317,6 +318,14 @@ main(void)
     // Initialize LED to OFF (0)
     //
     MAP_GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_1, ~GPIO_PIN_1);
+
+    //
+    // TODO: Configure Port  for as an output for the toggle LED.
+    //
+
+    //
+    // TODO: Initialize LED to OFF (0)
+    //
 
     //
     // Configure SysTick for a periodic interrupt.
@@ -331,7 +340,7 @@ main(void)
     // USER0 and USER1 registers.
     //
     MAP_FlashUserGet(&ui32User0, &ui32User1);
-    if((ui32User0 == 0xffffffff) || (ui32User1 == 0xffffffff))
+    if ((ui32User0 == 0xffffffff) || (ui32User1 == 0xffffffff))
     {
         //
         // We should never get here.  This is an error if the MAC address has
@@ -339,7 +348,7 @@ main(void)
         // Let the user know there is no MAC address
         //
         UARTprintf("No MAC programmed!\n");
-        while(1)
+        while (1)
         {
         }
     }
@@ -349,13 +358,12 @@ main(void)
     // address needed to program the hardware registers, then program the MAC
     // address into the Ethernet Controller registers.
     //
-    pui8MACArray[0] = ((ui32User0 >>  0) & 0xff);
-    pui8MACArray[1] = ((ui32User0 >>  8) & 0xff);
+    pui8MACArray[0] = ((ui32User0 >> 0) & 0xff);
+    pui8MACArray[1] = ((ui32User0 >> 8) & 0xff);
     pui8MACArray[2] = ((ui32User0 >> 16) & 0xff);
-    pui8MACArray[3] = ((ui32User1 >>  0) & 0xff);
-    pui8MACArray[4] = ((ui32User1 >>  8) & 0xff);
+    pui8MACArray[3] = ((ui32User1 >> 0) & 0xff);
+    pui8MACArray[4] = ((ui32User1 >> 8) & 0xff);
     pui8MACArray[5] = ((ui32User1 >> 16) & 0xff);
-
 
     //
     // Initialize the lwIP library, using DHCP.
@@ -425,7 +433,7 @@ main(void)
             {
                 uint32_t ui32_MeasdatBuffer;
 
-                ui32_MeasdatBuffer = (int)OPT3001ReadData();
+                ui32_MeasdatBuffer = (int) OPT3001ReadData();
                 /* sensor data is logical (LUX < MAX_INTENSITY) */
                 if (ui32_MeasdatBuffer < MAX_INTENSITY)
                 {
